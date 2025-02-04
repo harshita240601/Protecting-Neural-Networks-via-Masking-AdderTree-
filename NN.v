@@ -54,7 +54,7 @@ module neural_network #(
     );
 
     layer2 #(
-        .INPUT_SIZE(INPUT_SIZE),
+        .INPUT_SIZE(HIDDEN_SIZE),
         .WIDTH(WIDTH)
         .OUTPUT_SIZE(OUTPUT_SIZE)
     )(
@@ -64,11 +64,6 @@ module neural_network #(
         .w3(w23),
         .w4(w24),
         .w5(w25),
-        .w6(w26),
-        .w7(w27),
-        .w8(w28),
-        .w9(w29),
-        .w10(w210),
         .inputs(hidden_layer),
         .outputs(outputs)
     );
