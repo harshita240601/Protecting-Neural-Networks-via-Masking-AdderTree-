@@ -1,4 +1,4 @@
-module neural_network #(
+module NN #(
     parameter INPUT_SIZE = 10,
     parameter HIDDEN_SIZE = 10,
     parameter OUTPUT_SIZE = 5,
@@ -7,15 +7,15 @@ module neural_network #(
     input reg [WIDTH-1:0] inputs [INPUT_SIZE-1:0],
 
     input reg [WIDTH-1:0] w11 [INPUT_SIZE-1:0], 
-    input reg [WIDTH-1:0] w12 [INPUT_SIZE-1:0]
-    input reg [WIDTH-1:0] w13 [INPUT_SIZE-1:0]
-    input reg [WIDTH-1:0] w14 [INPUT_SIZE-1:0]
-    input reg [WIDTH-1:0] w15 [INPUT_SIZE-1:0]
-    input reg [WIDTH-1:0] w16 [INPUT_SIZE-1:0]
-    input reg [WIDTH-1:0] w17 [INPUT_SIZE-1:0]
-    input reg [WIDTH-1:0] w18 [INPUT_SIZE-1:0]
-    input reg [WIDTH-1:0] w19 [INPUT_SIZE-1:0]
-    input reg [WIDTH-1:0] w110 [INPUT_SIZE-1:0]
+    input reg [WIDTH-1:0] w12 [INPUT_SIZE-1:0],
+    input reg [WIDTH-1:0] w13 [INPUT_SIZE-1:0],
+    input reg [WIDTH-1:0] w14 [INPUT_SIZE-1:0],
+    input reg [WIDTH-1:0] w15 [INPUT_SIZE-1:0],
+    input reg [WIDTH-1:0] w16 [INPUT_SIZE-1:0],
+    input reg [WIDTH-1:0] w17 [INPUT_SIZE-1:0],
+    input reg [WIDTH-1:0] w18 [INPUT_SIZE-1:0],
+    input reg [WIDTH-1:0] w19 [INPUT_SIZE-1:0],
+    input reg [WIDTH-1:0] w110 [INPUT_SIZE-1:0],
 
     input reg [WIDTH-1:0] w21 [HIDDEN_SIZE-1:0], 
     input reg [WIDTH-1:0] w22 [HIDDEN_SIZE-1:0], 
@@ -35,9 +35,9 @@ module neural_network #(
     
     layer1 #(
         .INPUT_SIZE(INPUT_SIZE),
-        .WIDTH(WIDTH)
+        .WIDTH(WIDTH),
         .OUTPUT_SIZE(HIDDEN_SIZE)
-    ) (
+    ) l1(
         .b(b1),
         .w1(w11),
         .w2(w12),
@@ -55,9 +55,9 @@ module neural_network #(
 
     layer2 #(
         .INPUT_SIZE(HIDDEN_SIZE),
-        .WIDTH(WIDTH)
+        .WIDTH(WIDTH),
         .OUTPUT_SIZE(OUTPUT_SIZE)
-    )(
+    )l2(
         .b(b2),
         .w1(w21),
         .w2(w22),
@@ -67,30 +67,5 @@ module neural_network #(
         .inputs(hidden_layer),
         .outputs(outputs)
     );
-    // generate
-    //     for (i = 0; i < HIDDEN_SIZE; i = i + 1) begin : hidden_neurons
-    //         weighted_sum #(
-    //             .INPUT_SIZE(INPUT_SIZE),
-    //             .WIDTH(WIDTH)
-    //         ) hidden_sum (
-    //             .inputs(inputs),
-    //             .weights(weights1[i]),
-    //             .sum(hidden_layer[i])
-    //         );
-    //     end
-    // endgenerate
-
     
-    // generate
-    //     for (j = 0; j < OUTPUT_SIZE; j = j + 1) begin : output_neurons
-    //         weighted_sum #(
-    //             .INPUT_SIZE(HIDDEN_SIZE),
-    //             .WIDTH(WIDTH)
-    //         ) output_sum (
-    //             .inputs(hidden_layer),
-    //             .weights(weights2[j]),
-    //             .sum(outputs[j])
-    //         );
-    //     end
-    // endgenerate
 endmodule
